@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configures the Camel Context -->
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+  <camelContext xmlns="http://camel.apache.org/schema/spring">
+    <!-- here is a sample which processes the input files (leaving them in place - see the 'noop' flag)
+      then performs content based routing on the message using XPath -->
+    <!-- プロパティファイルの設定 -->
+    <propertyPlaceholder id="properties" location="classpath:camel.properties" />
+    <route>
+      <from uri="timer:test-hello?repeatCount=5" />
+      <to uri="log:{{CONSUMER_KEY}}" />
+    </route>
+  </camelContext>
+</beans>
